@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}
+Active Study - Comprehensive {{subject_name}} Notes for {{class_name}} Chapter {{chapter_name}}
+{% endblock title %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
+    <meta name="description" content="Boost your exam preparation with expertly crafted {{subject_name}} notes for {{class_name}} Chapter {{chapter_name}}. Learn key concepts, formulas, and tips to ace your exams!">
+    <meta name="keywords" content="{{class_name}} {{subject_name}} notes, {{chapter_name}} study material, {{subject_name}} chapter {{chapter_name}} revision guide, exam preparation tips for {{class_name}}, {{subject_name}} key concepts">
+    <meta name="author" content="Active Study">
+    <meta name="application-name" content="Active Study">
+    <meta name="robots" content="index, follow">
+   
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Comprehensive {{subject_name}} Notes for {{class_name}} Chapter {{chapter_name}} – Ace Your Exams!">
+    <meta property="og:description" content="Boost your exam preparation with expertly crafted {{subject_name}} notes for {{class_name}} Chapter {{chapter_name}}.">
+    <meta property="og:type" content="website">
+   
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Comprehensive {{subject_name}} Notes for {{class_name}} Chapter {{chapter_name}} – Ace Your Exams!">
+    <meta name="twitter:description" content="Boost your exam preparation with expertly crafted {{subject_name}} notes for {{class_name}} Chapter {{chapter_name}}.">
+
+    <title>Comprehensive {{subject_name}} Notes for {{class_name}} Chapter {{chapter_name}} – Ace Your Exams!</title>
+
+    <!-- Structured Data using JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Comprehensive {{subject_name}} Notes for {{class_name}} Chapter {{chapter_name}} – Ace Your Exams!",
+      "description": "Boost your exam preparation with expertly crafted {{subject_name}} notes for {{class_name}} Chapter {{chapter_name}}. Learn key concepts, formulas, and tips to ace your exams!",
+      "url": "{{ request.url }}",
+      "publisher": {
+          "@type": "Organization",
+          "name": "Active Study"
+      }
+    }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .pdf-viewer-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            max-width: 794px;
+            height: calc(794px * 1.414);
+            border: none;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        @media only screen and (max-width: 768px) {
+            iframe {
+                height: 500px;
+            }
+        }
+        .custom-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            margin-left: 10%;
+            margin-bottom: 10px;
+        }
+        .custom-button:hover {
+            background-color: #0056b3;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+{% endblock head %}
+
+{% block body %}
+<br>
+    <header>
+        <h1>Comprehensive {{subject_name}} Notes for {{class_name}} Chapter {{chapter_name}} – Ace Your Exams!</h1>
+        <p>Brought to you by <strong>Active Study</strong></p>
+    </header>
+
+    <br>
+    <a href="#book"><button class="custom-button">Show Notes</button></a>
+    <div class="con">
+        <main>
+            <section id="introduction">
+                <h2>{{subject_name}} Notes for {{class_name}} Chapter {{chapter_name}}: Your Ultimate Study Guide</h2>
+                <p>Are you searching for concise, well-structured notes to master <strong>{{class_name}} {{subject_name}} Chapter {{chapter_name}}</strong>? Look no further! This guide provides everything you need to understand the chapter’s core concepts, important definitions, and exam-focused insights. Whether you’re revising for exams or clarifying doubts, these notes will save time and enhance your preparation.</p>
+            </section>
+
+            <section id="importance">
+                <h2>Why Choose These {{subject_name}} Notes?</h2>
+                <ul>
+                    <li><strong>Exam-Oriented Content:</strong> Covers all topics from the latest syllabus.</li>
+                    <li><strong>Simplified Explanations:</strong> Complex ideas broken into easy-to-understand points.</li>
+                    <li><strong>Time-Saving:</strong> Organized format for quick revision.</li>
+                    <li><strong>Diagrams & Examples:</strong> Visual aids and real-world applications to reinforce learning.</li>
+                </ul>
+            </section>
+
+            <section id="key-topics">
+                <h2>Key Topics Covered in {{chapter_name}}</h2>
+                <ul>
+                    <li><strong>Topic 1:</strong> [Brief summary of the first key topic, including definitions or formulas].</li>
+                    <li><strong>Topic 2:</strong> [Highlight critical theories, laws, or problem-solving methods].</li>
+                    <li><strong>Topic 3:</strong> [Explain practical applications or case studies].</li>
+                    <li><strong>Topic 4:</strong> [Commonly asked exam questions or tricky areas].</li>
+                </ul>
+                <p><em>Pro Tip:</em> Focus on [specific subtopic] as it frequently appears in exams!</p>
+            </section>
+
+            <section id="study-tips">
+                <h2>How to Use These Notes Effectively</h2>
+                <ol>
+                    <li><strong>Start Early:</strong> Review notes alongside classroom lessons.</li>
+                    <li><strong>Highlight Key Terms:</strong> Use markers to flag important formulas or definitions.</li>
+                    <li><strong>Practice Regularly:</strong> Solve included examples to test your understanding.</li>
+                    <li><strong>Revise Weekly:</strong> Dedicate 15 minutes daily to retain concepts long-term.</li>
+                </ol>
+            </section>
+
+            <section id="faqs">
+                <h2>FAQs About {{class_name}} {{subject_name}} Chapter {{chapter_name}} Notes</h2>
+                <ul>
+                    <li><strong>Q1:</strong> Are these notes sufficient for exam preparation?<br>Yes! They cover all syllabus topics, but pair them with textbook readings for deeper understanding.</li>
+                    <li><strong>Q2:</strong> How do I download these notes?<br>[Add instructions for accessing/downloading the notes from your webpage].</li>
+                    <li><strong>Q3:</strong> Do you provide solved numericals or diagrams?<br>Absolutely! Diagrams, graphs, and step-by-step solutions are included for visual learners.</li>
+                    <li><strong>Q4:</strong> Are these notes suitable for competitive exams?<br>While focused on {{class_name}}, they build a strong foundation for entrance tests like [mention relevant exams].</li>
+                </ul>
+            </section>
+
+            <section id="final-thoughts">
+                <h2>Final Thoughts</h2>
+                <p>Mastering <strong>{{chapter_name}}</strong> in {{subject_name}} doesn’t have to be stressful. With these structured notes, you’ll grasp concepts faster, retain information longer, and approach exams with confidence. Bookmark this page for quick access, and share it with classmates to study smarter together!</p>
+            </section>
+
+            <h1 style="text-align: center;">Active Study Books</h1>
+
+            <div class="pdf-viewer-container">
+                <h2>Book Viewer</h2>
+                {% if english_book_url %}
+                    <iframe id="book" src="http://127.0.0.1:8888{{ english_book_url }}" loading="lazy"></iframe>
+                {% else %}
+                    <p>No English book  available.</p>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+    
+  
+{% endblock body %}

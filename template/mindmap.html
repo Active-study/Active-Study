@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}
+Active Study - MindMap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}
+{% endblock title %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <meta name="description" content="Download the ultimate mindmap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}. Visualize key concepts, streamline your revision, and excel in your studies with Active Study.">
+    <meta name="keywords" content="mindmap pdf, {{ class_name }} {{ subject_name }}, Chapter {{ chapter_name }}, study mindmap, Active Study mindmap">
+    <meta name="author" content="Active Study">
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Active Study - MindMap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}">
+    <meta property="og:description" content="Download the ultimate mindmap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}. Visualize key concepts, streamline your revision, and excel in your studies with Active Study.">
+    <meta property="og:type" content="website">
+   
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Active Study - MindMap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}">
+    <meta name="twitter:description" content="Download the ultimate mindmap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}. Visualize key concepts, streamline your revision, and excel in your studies with Active Study.">
+    
+
+    <!-- Structured Data using JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Active Study - MindMap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}",
+      "description": "Download the ultimate mindmap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}. Visualize key concepts, streamline your revision, and excel in your studies with Active Study.",
+      "url": "{{ request.url }}",
+      "publisher": {
+          "@type": "Organization",
+          "name": "Active Study"
+      }
+    }
+    </script>
+
+    <title>Active Study - MindMap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .download-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+        .pdf-viewer-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            max-width: 794px;
+            height: calc(794px * 1.414);
+            border: none;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        @media only screen and (max-width: 768px) {
+            iframe {
+                height: 500px;
+            }
+        }
+        
+    </style>
+{% endblock head %}
+
+{% block body %}
+    <header>
+        <h1>Active Study - MindMap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}</h1>
+        <p>Empower your studies with our visual mindmap designed specifically for {{ class_name }} students studying {{ subject_name }}.</p>
+    </header>
+    
+
+    <div class="container">
+        <section id="introduction">
+            <a class="download-button" href="#pdfshow" >Show mind map</a>
+            <h2>About the MindMap PDF</h2>
+            <p>Our mindmap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }} is meticulously crafted to help you break down and understand complex concepts. This visual tool is ideal for quick revision and in-depth study, ensuring you never miss an important detail.</p>
+        </section>
+        
+        <section id="features">
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Comprehensive Visual Guide:</strong> Clearly maps out all the essential topics and subtopics of Chapter {{ chapter_name }}.</li>
+                <li><strong>Easy Navigation:</strong> Quickly find and focus on areas that need extra attention.</li>
+                <li><strong>Enhanced Learning:</strong> Improve memory retention and conceptual understanding.</li>
+                <li><strong>Downloadable & Printable:</strong> Access the PDF anytime, and print it for offline study sessions.</li>
+            </ul>
+        </section>
+
+        <section id="download">
+            <h2>Download the MindMap PDF</h2>
+            {% if mindmap_pdf_url %}
+                <a class="download-button" href="{{ mindmap_pdf_url }}" target="_blank" rel="noopener noreferrer">Download Now</a>
+                <div class="pdf-viewer">
+                    <iframe id="pdfshow" src="{{ mindmap_pdf_url }}" loading="lazy"></iframe>
+                </div>
+            {% else %}
+                <p>The MindMap PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }} is currently unavailable. Please check back later.</p>
+            {% endif %}
+        </section>
+    </div>
+   
+{% endblock body %}

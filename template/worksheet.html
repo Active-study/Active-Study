@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}
+  Active Study Questions Only
+{% endblock title %}
+
+{% block head %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Active Study Questions Only</title>
+  <style>
+    /* Global Styles for Dark Theme */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #222;
+      color: #fff;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .container {
+      background-color: transparent;
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+    .question-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+      font-size: 20px;
+    }
+    .loading, .error {
+      text-align: center;
+      font-size: 18px;
+    }
+    .loading {
+      color: #ccc;
+    }
+    .error {
+      color: #ff6b6b;
+    }
+  </style>
+{% endblock head %}
+
+{% block body %}
+<br>
+<h1>Workseet</h1>
+  <div class="container">
+   
+    <br>
+    <div id="questionsContainer">
+      <p class="loading">Loading questions...</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // URL to fetch the JSON data containing questions
+      const jsonUrl = `{{ work_url }}`;
+      const container = document.getElementById('questionsContainer');
+
+      async function loadQuestions() {
+        try {
+          const response = await fetch(jsonUrl);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          container.innerHTML = '';
+
+          if (data && data.data && Array.isArray(data.data)) {
+            data.data.forEach((item, index) => {
+              const questionDiv = document.createElement('div');
+              questionDiv.className = 'question-item';
+              questionDiv.textContent = `${index + 1}. ${item.que}`;
+              container.appendChild(questionDiv);
+            });
+          } else {
+            container.innerHTML = '<p class="error">No questions available.</p>';
+          }
+        } catch (error) {
+          console.error('Error loading questions:', error);
+          container.innerHTML = '<p class="error">Error loading questions. Please try again later.</p>';
+        }
+      }
+
+      loadQuestions();
+    });
+  </script>
+{% endblock body %}

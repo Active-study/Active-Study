@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}
+Active Study - NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}
+{% endblock title %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <meta name="description" content="Access detailed NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}. Master concepts, review answers, and excel in your exams with Active Study.">
+    <meta name="keywords" content="NCERT Solutions, {{ class_name }} {{ subject_name }}, Chapter {{ chapter_name }}, NCERT sol, exam preparation, Active Study">
+    <meta name="author" content="Active Study">
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Active Study - NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}">
+    <meta property="og:description" content="Access detailed NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}. Master concepts, review answers, and excel in your exams with Active Study.">
+    <meta property="og:type" content="website">
+    
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Active Study - NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}">
+    <meta name="twitter:description" content="Access detailed NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}. Master concepts, review answers, and excel in your exams with Active Study.">
+
+
+    <!-- Structured Data using JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Active Study - NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}",
+      "description": "Access detailed NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}. Master concepts, review answers, and excel in your exams with Active Study.",
+      "url": "{{ request.url }}",
+      "publisher": {
+          "@type": "Organization",
+          "name": "Active Study"
+      }
+    }
+    </script>
+
+    <title>Active Study - NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .download-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+        .pdf-viewer {
+            margin: 20px 0;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 1000px;
+            border: none;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        @media only screen and (max-width: 768px) {
+            iframe {
+                height: 600px;
+            }
+        }
+    </style>
+{% endblock head %}
+
+{% block body %}
+    <header>
+        <h1>Active Study - NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }}</h1>
+        <p>Enhance your learning with our expert NCERT Solutions tailored for {{ class_name }} students studying {{ subject_name }}.</p>
+    </header>
+    <div class="container">
+        <section id="introduction">
+            <h2>About the NCERT Solutions</h2>
+            <p>Our NCERT Solutions for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }} provide detailed answers and explanations to help you understand key concepts and excel in your exams. Each solution is designed to clarify doubts and support your study plan effectively.</p>
+        </section>
+
+        <section id="features">
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Detailed Explanations:</strong> Step-by-step solutions for each question.</li>
+                <li><strong>Concept Clarity:</strong> Understand the reasoning behind each answer.</li>
+                <li><strong>Exam-Ready:</strong> Prepare effectively with NCERT's trusted methodology.</li>
+                <li><strong>Downloadable & Printable:</strong> Access and print the solutions for offline study sessions.</li>
+            </ul>
+        </section>
+
+        <section id="download">
+            <h2>Download the NCERT Solutions PDF</h2>
+            {% if ncert_sol_pdf_url %}
+                <a class="download-button" href="{{ ncert_sol_pdf_url }}" target="_blank" rel="noopener noreferrer">Download Now</a>
+                <div class="pdf-viewer">
+                    <iframe src="{{ ncert_sol_pdf_url }}" loading="lazy"></iframe>
+                </div>
+            {% else %}
+                <p>The NCERT Solutions PDF for {{ class_name }} {{ subject_name }} Chapter {{ chapter_name }} is currently unavailable. Please check back later.</p>
+            {% endif %}
+        </section>
+    </div>
+  
+{% endblock body %}

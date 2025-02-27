@@ -1,0 +1,608 @@
+{% extends "base.html" %}
+{% block title %}
+Active Study
+{% endblock title %}
+
+{% block head %}
+<!-- SEO Meta Tags -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Active Study provides comprehensive study material, NCERT solutions, notes, books, quizzes, and worksheets to enhance your learning experience.">
+<meta name="keywords" content="Active Study, NCERT Solutions, Notes, Study Material, Quizzes, Books, Worksheets, Education">
+<meta name="author" content="Active Study">
+<link rel="canonical" href="https://activestudy.web.app">
+
+<!-- Open Graph Meta Tags for Social Sharing -->
+<meta property="og:title" content="Active Study - Your Learning Partner">
+<meta property="og:description" content="Explore NCERT solutions, notes, quizzes, books, and worksheets for an enriched learning experience.">
+<meta property="og:image" content="static/as.svg">
+<meta property="og:url" content="https://activestudy.web.app">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Active Study">
+<meta name="twitter:description" content="Explore NCERT solutions, notes, quizzes, books, and worksheets for an enriched learning experience.">
+<meta name="twitter:image" content="static/b3.webp">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Active Study",
+  "url": "https://activestudy.web.app",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://activestudy.web.app/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<style>
+  /* Container styling */
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* Subject card with initial slide-up animation */
+  .left-box {
+    width: 320px;
+    padding: 20px;
+    border: 1px solid #444;
+    border-radius: 12px;
+    background-color: #1e1e2f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.8s ease forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Slide-up animation on page load */
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hover effect to move box up */
+  .left-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+  }
+
+  /* Subject title */
+  .left-box h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.8rem;
+    color: #fff;
+  }
+
+  /* Chapter title */
+  .left-box h4 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #ccc;
+  }
+
+  /* List styling */
+  .left-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .left-box li {
+    margin-bottom: 10px;
+  }
+
+  /* Link styling */
+  .left-box a {
+    text-decoration: none;
+    color: #4dabf7;
+    font-size: 1.3rem;
+    transition: color 0.2s ease;
+  }
+
+  .left-box a:hover {
+    color: #82cfff;
+    text-decoration: underline;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .box {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .left-box {
+      width: 90%;
+    }
+  }
+</style>
+{% endblock head %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container-fluid">
+    <div class="navbar-nav">
+      <a class="nav-link active" href="#NOTES">Notes</a>
+      <a class="nav-link active" href="#NCERT-SOLUTIONS">NCERT SOLUTIONS</a>
+      <a class="nav-link active" href="#BOOKS">Books</a>
+      <a class="nav-link active" href="#WORKSEET">WORKSEET</a>
+      <a class="nav-link active" href="#QUESTIONS">Questions</a>
+      <a class="nav-link active" href="#QUIZ">Quiz</a>
+      <a class="nav-link active" href="#HINDI-BOOK">Hindi-Book</a>
+    </div>
+  </div>
+</nav>
+<br>
+<!-- Carousel Section -->
+<header>
+  <h1>Welcome to Active Study</h1>
+  <p>Your Ultimate Destination for Quality Educational Resources</p>
+</header>
+
+<section>
+  <h2>About Active Study</h2>
+  <p>Active Study is a leading platform dedicated to providing high-quality educational resources for students and educators. Our mission is to make learning engaging, accessible, and effective. From NCERT books and quizzes to worksheets, class notes, and 3D models, we offer a comprehensive range of study materials to support academic success.</p>
+</section>
+
+<section>
+  <h2>Our Educational Resources</h2>
+  <ul>
+      <li><strong>NCERT Books:</strong> Access a complete collection of NCERT books for various classes and subjects.</li>
+      <li><strong>Quizzes:</strong> Interactive quizzes to test your knowledge and enhance learning.</li>
+      <li><strong>Worksheets:</strong> Printable worksheets for practice and revision.</li>
+      <li><strong>Class Notes:</strong> Well-organized notes to help you grasp complex concepts easily.</li>
+      
+  </ul>
+</section>
+
+<section>
+  <h2>Why Choose Active Study?</h2>
+  <p>At Active Study, we believe in empowering students with the right tools and resources for effective learning. Our platform offers:</p>
+  <ul>
+      <li>Comprehensive and up-to-date study materials</li>
+      <li>User-friendly interface for easy navigation</li>
+      <li>Engaging and interactive content</li>
+      <li>Accessible anytime, anywhere</li>
+  </ul>
+</section>
+<center>
+  <div id="carouselExampleCaptions" class="carousel slide cls" style="width: 85%;">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="static/b3.webp" class="d-block w-100" alt="Active Study Slide 1">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Active Study.</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="static/b2.webp" class="d-block w-100" alt="Active Study Slide 2">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Active Study.</h5>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="static/b1.webp" class="d-block w-100" alt="Active Study Slide 3">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Active Study.</h5>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</center>
+
+<!-- Content Cards Section -->
+<div class="container">
+  <div class="card" id="NCERT-SOLUTIONS">
+    <h3>NCERT SOLUTIONS</h3>
+    <p>Access well-organized NCERT SOLUTIONS for various subjects to enhance your learning.</p>
+    <button onclick="openModal('ncert-sol')">Learn More</button>
+  </div>
+
+  <div class="card" id="NOTES">
+    <h3>NOTES</h3>
+    <p>Access well-organized notes for various subjects to enhance your learning.</p>
+    <button onclick="openModal('notes')">Learn More</button>
+  </div>
+
+  <div class="card" id="BOOKS">
+    <h3>Books</h3>
+    <p>Access well-organized Books for various subjects to enhance your learning.</p>
+    <button onclick="openModal('eng-book')">Learn More</button>
+  </div>
+  <div class="card" id="MindMap">
+    <h3>Mind Map</h3>
+    <p>Access well-organized MindMap for various subjects to enhance your learning.</p>
+    <button onclick="openModal('mindmap')">Learn More</button>
+  </div>
+
+  <div class="card" id="QUESTIONS">
+    <h3>Questions</h3>
+    <p>Practice questions to test your knowledge and prepare for exams.</p>
+    <button onclick="openModal('questions')">Learn More</button>
+  </div>
+
+  <div class="card" id="QUIZ">
+    <h3>Quiz</h3>
+    <p>Interactive quizzes to evaluate your progress.</p>
+    <button onclick="openModal('quiz')">Learn More</button>
+  </div>
+  
+  <div class="card" id="WORKSEET">
+    <h3>Workseet</h3>
+    <p>Workseet to test your knowledge and prepare for exams.</p>
+    <button onclick="openModal('worksheet')">Learn More</button>
+  </div>
+
+  <div class="card" id="HINDI-BOOK">
+    <h3>Hindi-Book</h3>
+    <p>Access well-organized Hindi-Book for various subjects to enhance your learning.</p>
+    <button onclick="openModal('hin-book')">Learn More</button>
+  </div>
+</div>
+<!-- <span id="element" style="display: none;"></span> -->
+
+<!-- Modals -->
+<div id="notesModal" class="modal">
+  <div class="modal-header">
+    <h3 id="h3"></h3>
+    <button onclick="closeModal()">&times;</button>
+  </div>
+  <p>Explore comprehensive Study material</p>
+  <form>
+    <!-- Dropdown for Class -->
+    <label for="classSelect">Select Class:</label>
+    <select id="classSelect" name="class" class="form-select" style="margin-bottom: 10px;">
+      <option value="9"></option>
+    </select>
+
+    <!-- Dropdown for Subject -->
+    <label for="subjectSelect">Select Subject:</label>
+    <select id="subjectSelect" name="subject" class="form-select" style="margin-bottom: 10px;">
+    </select>
+
+    <!-- Dropdown for Chapter -->
+    <label for="chapterSelect">Select Chapter:</label>
+    <select id="chapterSelect" name="chapter" class="form-select" style="margin-bottom: 10px;">
+    </select>
+
+    <!-- Submit Button -->
+    <button type="button" id="getdata" class="btn btn-primary" onclick="sumit()" style="margin-top: 10px;">Submit</button>
+  </form>
+</div>
+
+<!-- Select Modal for Quiz, Questions, or Worksheet -->
+<div id="select" class="modal" style="display:none;">
+  <div class="modal-header">
+    <h3 id="h33">Select Resource</h3>
+    <button onclick="closeSelectModal()">&times;</button>
+  </div>
+  <form>
+    <label for="resourceSelect">Available Resources:</label>
+    <select id="resourceSelect"  name="resource" class="form-select" style="margin-bottom: 10px;">
+      <!-- Options will be populated dynamically -->
+    </select>
+    <button type="button" class="btn btn-primary" style="margin-top: 10px;" onclick="downloadResource()">Open</button>
+  </form>
+</div>
+<br>
+<nav class="navbar navbar-expand-lg custom-navbar">
+
+  <div class="container-fluid">
+
+    <div class="navbar-nav" id="link">
+    
+    </div>
+    
+  </div>
+
+</nav>
+<br>
+
+<div id="classContainer"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const classContainer = document.getElementById('classContainer');
+
+    // Fetch all classes
+    fetch('/get-classes/')
+      .then(response => response.json())
+      .then(classes => {
+        if (!Array.isArray(classes) || classes.length === 0) {
+          classContainer.innerHTML = '<p>No classes available.</p>';
+          return;
+        }
+
+        // Iterate over classes
+        classes.forEach(cls => {
+          const classBox = document.createElement('div');
+          classBox.classList.add('box');
+          classBox.id=cls.class_name
+          classBox.innerHTML = `<h2>${cls.class_name}</h2>`;
+
+          // Fetch subjects for each class
+          fetch(`/get-subjects/${cls.id}/`)
+            .then(response => response.json())
+            .then(subjects => {
+              subjects.forEach(sub => {
+                const subjectBox = document.createElement('div');
+                subjectBox.classList.add('left-box');
+                subjectBox.innerHTML = `<h3>${sub.subject_name}</h3>`;
+
+                // Fetch chapters for each subject
+                fetch(`/get-chapters/${sub.id}/`)
+                  .then(response => response.json())
+                  .then(chapters => {
+                    chapters.forEach(ch => {
+                      const chapterBox = document.createElement('div');
+                      chapterBox.classList.add('box');
+                      chapterBox.innerHTML = `
+                        <h3>${ch.chapter_name}</h3>
+                        <ul>
+                          <li><a href="/${cls.class_name}/${sub.subject_name}/${ch.chapter_name}/ncert-sol">Ncert-Solutions</a></li>
+                          <li><a href="/${cls.class_name}/${sub.subject_name}/${ch.chapter_name}/notes">Notes</a></li>
+                          <li><a href="/${cls.class_name}/${sub.subject_name}/${ch.chapter_name}/mindmap">MindMap</a></li>
+                          <li><a href="/${cls.class_name}/${sub.subject_name}/${ch.chapter_name}/eng-book">Ncert-Book</a></li>
+                          <li><a href="/${cls.class_name}/${sub.subject_name}/${ch.chapter_name}/hin-book">Ncert-Book Hindi</a></li>
+                         <li><a href="/#QUIZ">Quiz</a></li>
+                         <li><a href="/#QUESTIONS">SamplePaper/Question </a></li>
+                         <li><a href="/#WORKSEET">Worksheet</a></li>
+
+                        </ul>
+                      `;
+                      subjectBox.appendChild(chapterBox);
+                    });
+                  });
+                classBox.appendChild(subjectBox);
+              });
+            });
+
+          classContainer.appendChild(classBox);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching classes:', error);
+        classContainer.innerHTML = '<p>Error loading classes.</p>';
+      });
+  });
+</script>
+
+
+<script>
+  // Global variable to store the current resource type
+  let currentResourceType = '';
+
+  function openModal(modalId) {
+    currentResourceType = modalId
+    document.getElementById("notesModal").style.display = "block";
+    var a="e";
+    if(modalId=="hin-book"){
+    a= "Hindi Book";
+    }
+    else if (modalId=="eng-book") {
+      a="NCERT Book";
+    }
+    else if (modalId=="mindmap") {
+      a="Mind Map";
+    }
+    else if (modalId=="ncert-sol") {
+      a="NCERT Solution";
+    }
+    else if (modalId=="notes") {
+      a="Notes";
+    }
+    else if (modalId=="worksheet") {
+      a="Worksheet";
+    }
+    
+    else if (modalId=="quiz") {
+      a="Quiz";
+      
+    }
+    else if (modalId=="questions") {
+      a="Question";
+    }
+
+
+    document.getElementById("h3").innerText=a;
+  }
+
+  function closeModal() {
+    document.getElementById("notesModal").style.display = 'none';
+  }
+  
+  function closeSelectModal() {
+    document.getElementById("select").style.display = 'none';
+  }
+  function sumit() {
+    
+    if(currentResourceType=="quiz"||currentResourceType=="questions" || currentResourceType=="worksheet"){
+      return 0;
+     }
+    // Retrieve the selected values from the dropdowns
+    const subjectElement = document.getElementById("subjectSelect").value;
+    const classSelect = document.getElementById("classSelect").value;
+    const chapterElement = document.getElementById("chapterSelect").value;
+  
+    
+    const subject = document.getElementById(`sub${subjectElement}`).innerText;
+    const classname = document.getElementById(`class${classSelect}`).innerText;
+    const chapter = document.getElementById(`ch${chapterElement}`).innerText;
+   
+  
+    // Replace all spaces with underscores in each value
+
+    
+    // Assuming currentResourceType is defined (either as a global variable or retrieved elsewhere)
+    // For example:
+    // const currentResourceType = 'notes';
+    // Construct the URL using template literals
+    const url = `/${classname}/${subject}/${chapter}/${currentResourceType}`;
+    
+    // Load the constructed URL
+    window.location.href = url;
+  }
+  
+
+
+  function openSelectModal(resourceItems) {
+    const subjectElement = document.getElementById("subjectSelect").value;
+    const classSelect = document.getElementById("classSelect").value;
+    const chapterElement = document.getElementById("chapterSelect").value;
+  
+    
+    const subject_u = document.getElementById(`sub${subjectElement}`).innerText;
+    const classname = document.getElementById(`class${classSelect}`).innerText;
+    const chapter_u = document.getElementById(`ch${chapterElement}`).innerText;
+   
+    const selectDropdown = document.getElementById("resourceSelect");
+    selectDropdown.innerHTML = resourceItems.map((item, index) =>
+      `<option value="${item.id}" data-url="/${classname}/${subject_u}/${chapter_u}/${item.title}">${index + 1}. ${item.title}</option>`
+    ).join('');
+    document.getElementById("select").style.display = 'block';
+  }
+
+  function downloadResource() {
+    const selectDropdown = document.getElementById("resourceSelect");
+    const selectedOption = selectDropdown.options[selectDropdown.selectedIndex];
+    if (selectedOption) {
+      const resourceUrl = selectedOption.getAttribute('data-url');
+      console.log(resourceUrl);
+      
+      window.location.href = `${currentResourceType}${resourceUrl}`;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const classSelect = document.getElementById('classSelect');
+    const subjectSelect = document.getElementById('subjectSelect');
+    const chapterSelect = document.getElementById('chapterSelect');
+    const getDataBtn = document.getElementById('getdata');
+    const linkdive =document.getElementById("link");
+   
+    
+    // Load initial classes
+    fetch('/get-classes/')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(classes => {
+      if (!Array.isArray(classes) || classes.length === 0) {
+        console.warn('No classes available.');
+        return;
+      }
+       
+      linkdive.innerHTML = classes.map((d, index) =>
+        `<a class="nav-link active" id="link-${index}" value="${d.id}" href="class/${d.class_name}">${d.class_name}</a>`
+      ).join('');
+  
+      classSelect.innerHTML = classes.map(c =>
+        `<option value="${c.id}" id="class${c.id}">${c.class_name}</option>`
+      ).join('');
+  
+     
+        
+        loadSubjects(classSelect.value);
+      
+    })
+    .catch(error => console.error('Error loading classes:', error));
+  
+    classSelect.addEventListener('change', function() {
+      loadSubjects(this.value);
+    });
+
+    subjectSelect.addEventListener('change', function() {
+      loadChapters(this.value);
+    });
+
+    function loadSubjects(classId) {
+      fetch(`/get-subjects/${classId}/`)
+        .then(response => response.json())
+        .then(subjects => {
+        subjectSelect.innerHTML = subjects.map(s =>
+            `<option value="${s.id}" id="sub${s.id}">${s.subject_name}</option>`
+          ).join('');
+          loadChapters(subjectSelect.value);
+        });
+    }
+
+    function loadChapters(subjectId) {
+      fetch(`/get-chapters/${subjectId}/`)
+        .then(response => response.json())
+        .then(chapters => {
+          chapterSelect.innerHTML = chapters.map(c =>
+            `<option value="${c.id}" id="ch${c.id}">${c.chapter_name}</option>`
+          ).join('');
+        });
+    }
+
+    getDataBtn.addEventListener('click', function() {
+      const chapterId = chapterSelect.value;
+      if (currentResourceType === 'quiz') {
+       console.log(chapterId)
+        fetch(`/get-quiz/${chapterId}/`)
+          .then(response => response.json())
+          .then(quizItems => {
+            openSelectModal(quizItems);
+          });
+      } else if (currentResourceType === 'questions') {
+        fetch(`/get-questions/${chapterId}/`)
+          .then(response => response.json())
+          .then(questionItems => {
+            openSelectModal(questionItems);
+          });
+      } else if (currentResourceType === 'worksheet') {
+        fetch(`/get-worksheets/${chapterId}/`)
+          .then(response => response.json())
+          .then(worksheetItems => {
+            openSelectModal(worksheetItems);
+          });
+      } else {
+        fetch(`/get-resources/${chapterId}/`)
+          .then(response => response.json())
+          .then(resources => {
+            const element = document.getElementById('element');
+            element.innerHTML = `
+              ${resources.notes ? `<a href="${resources.notes}" download>Download Notes</a><br>` : ''}
+              ${resources.english_book ? `<a href="${resources.english_book}" download>Download English Book</a><br>` : ''}
+              ${resources.hindi_book ? `<a href="${resources.hindi_book}" download>Download Hindi Book</a><br>` : ''}
+              ${resources.questions ? `<a href="${resources.questions}" download>Download Questions</a><br>` : ''}
+              ${resources.quiz ? `<a href="${resources.quiz}" download>Download Quiz</a><br>` : ''}
+            `;
+            element.style.display = 'block';
+          });
+      }
+    });
+ 
+   
+  });
+  
+</script>
+{% endblock body %}

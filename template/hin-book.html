@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}
+Active Study - Hindi Book for {{ class_name }}
+{% endblock title %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <meta name="description" content="Download the comprehensive Hindi Book for {{ class_name }}. Enhance your studies with detailed explanations, exercises, and practice materials in Hindi from Active Study.">
+    <meta name="keywords" content="Hindi book, {{ class_name }} Hindi, Hindi textbook, Active Study, Hindi study material">
+    <meta name="author" content="Active Study">
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Active Study - Hindi Book for {{ class_name }}">
+    <meta property="og:description" content="Download the comprehensive Hindi Book for {{ class_name }}. Enhance your studies with detailed explanations, exercises, and practice materials in Hindi from Active Study.">
+    <meta property="og:type" content="website">
+
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Active Study - Hindi Book for {{ class_name }}">
+    <meta name="twitter:description" content="Download the comprehensive Hindi Book for {{ class_name }}. Enhance your studies with detailed explanations, exercises, and practice materials in Hindi from Active Study.">
+    
+
+    <!-- Structured Data using JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Active Study - Hindi Book for {{ class_name }}",
+      "description": "Download the comprehensive Hindi Book for {{ class_name }}. Enhance your studies with detailed explanations, exercises, and practice materials in Hindi from Active Study.",
+      "url": "{{ request.url }}",
+      "publisher": {
+          "@type": "Organization",
+          "name": "Active Study"
+      }
+    }
+    </script>
+
+    <title>Active Study - Hindi Book for {{ class_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .download-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+        .pdf-viewer {
+            margin: 20px 0;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 1000px;
+            border: none;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        @media only screen and (max-width: 768px) {
+            iframe {
+                height: 600px;
+            }
+        }
+    </style>
+{% endblock head %}
+
+{% block body %}
+    <header>
+        <h1>Active Study - Hindi Book for {{ class_name }}</h1>
+        <p>Enhance your studies with our comprehensive Hindi Book, designed specifically for {{ class_name }} students.</p>
+    </header>
+    <div class="container">
+        <section id="introduction">
+            <h2>About the Hindi Book</h2>
+            <p>This Hindi Book for {{ class_name }} provides detailed explanations, exercises, and practice questions all in Hindi. It is an essential resource to support your academic journey and improve your language proficiency.</p>
+        </section>
+
+        <section id="features">
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Comprehensive Coverage:</strong> Covers all key topics with clear, detailed explanations in Hindi.</li>
+                <li><strong>Practice Exercises:</strong> Includes a variety of exercises to reinforce your learning.</li>
+                <li><strong>User-Friendly Format:</strong> Easy to navigate, download, and print for offline study.</li>
+                <li><strong>Trusted Resource:</strong> Developed by Active Study to support your academic success.</li>
+            </ul>
+        </section>
+
+        <section id="download">
+            <h2>Download the Hindi Book</h2>
+            {% if hindi_book_url %}
+                <a class="download-button" href="{{ hindi_book_url }}" target="_blank" rel="noopener noreferrer">Download Now</a>
+                <div class="pdf-viewer">
+                    <iframe id="book" loading="lazy"></iframe>
+                </div>
+            {% else %}
+                <p>The Hindi Book for {{ class_name }} is currently unavailable. Please check back later.</p>
+            {% endif %}
+        </section>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const bookUrl = "{{ english_book_url }}";
+            
+            if (bookUrl) {
+                // Assign URL to iframe
+                const bookFrame = document.getElementById("book");
+                bookFrame.src = bookUrl.trim();
+            } else {
+                console.error("No English book URL provided.");
+            }
+        });
+        </script>
+    
+{% endblock body %}

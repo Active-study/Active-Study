@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}
+Download  App
+{% endblock title %}
+{% block body %}
+
+    <style>
+        header {
+            background-color: #2b2b40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .app-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .app-info img {
+            max-width: 150px;
+            margin: 10px 0;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #2c2f33;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #444;
+        }
+        .install-instructions {
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .install-instructions ol {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+    <br>
+    <header>
+        <h1>Download Our Android App</h1>
+    </header>
+    <br>
+    <center>
+        <div class="container card" style="width: 95%;">
+            <div class="app-info">
+                <!-- App Logo -->
+                <img src="static/as.svg" alt="App Logo">
+                <!-- App Description -->
+                <p style="color: white;">Download our Android app to access all the features on the go! Stay updated with your studies, manage resources, and more.</p>
+            </div>
+            <!-- Download Button -->
+            <div style="text-align: center;">
+                <a href="app-release.apk" class="download-btn" download>
+                    <i class="fab fa-android"></i> Download App
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="container card" style="width: 95%;">
+            <h3 style="color: #fff;">How to Install the APK</h3>
+            <ol style="color: #fff;">
+                <li style="color: #fff;">Download the APK file by clicking the <strong>Download App</strong> button above.</li>
+                <li style="color: #fff;">Before installing the APK, you may need to enable installation from unknown sources on your Android device:
+                    <ul style="color: #fff;">
+                        <li>Go to <strong>Settings</strong> &gt; <strong>Security</strong> or <strong>Privacy</strong> &gt; <strong>Install unknown apps</strong>.</li>
+                        <li>Select the browser or file manager you used to download the APK.</li>
+                        <li>Enable the option <strong>Allow from this source</strong>.</li>
+                    </ul>
+                </li>
+                <li>Open the downloaded APK file from your <strong>Downloads</strong> folder or the notification bar.</li>
+                <li>Click <strong>Install</strong> to begin the installation.</li>
+                <li>Once the installation is complete, tap <strong>Open</strong> to launch the app and start using it.</li>
+            </ol>
+        </div>
+    </center>
+    {% endblock body %}

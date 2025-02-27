@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ class_instance.class_name }} Resources - Active Study
+{% endblock title %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore comprehensive {{ class_instance.class_name }} resources at Active Study. Find NCERT Solutions, study notes, mind maps, and more to excel in your academics.">
+<meta name="keywords" content="Active Study, {{ class_instance.class_name }} resources, NCERT Solutions, study materials, notes, mind maps, educational resources">
+<meta name="author" content="Active Study">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+<style>
+  /* Container styling */
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /* Subject card with initial slide-up animation */
+  .left-box {
+    width: 320px;
+    padding: 20px;
+    border: 1px solid #444;
+    border-radius: 12px;
+    background-color: #1e1e2f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.8s ease forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Slide-up animation on page load */
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hover effect to move box up */
+  .left-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
+  }
+
+  /* Subject title */
+  .left-box h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.8rem;
+    color: #fff;
+  }
+
+  /* Chapter title */
+  .left-box h4 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #ccc;
+  }
+
+  /* List styling */
+  .left-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .left-box li {
+    margin-bottom: 10px;
+  }
+
+  /* Link styling */
+  .left-box a {
+    text-decoration: none;
+    color: #4dabf7;
+    font-size: 1.3rem;
+    transition: color 0.2s ease;
+  }
+
+  .left-box a:hover {
+    color: #82cfff;
+    text-decoration: underline;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .box {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .left-box {
+      width: 90%;
+    }
+  }
+</style>
+
+
+
+{% endblock head %}
+
+{% block body %}
+<br>
+
+  <center>
+    <h1 class="mb-3">{{ class_instance.class_name }} Resources</h1>
+  </center>
+  <br>
+  
+  <!-- SEO-Optimized Article Section -->
+  <article>
+    <h2>Welcome to Active Study: Your Ultimate Destination for {{ class_instance.class_name }} Resources</h2>
+    <p>
+      At Active Study, we understand that finding high-quality study materials can make all the difference in your academic journey. Our platform is dedicated to providing comprehensive <strong>{{ class_instance.class_name }} resources</strong> including NCERT Solutions, detailed study notes, interactive mind maps, and much more. Whether you’re preparing for exams or looking to deepen your understanding of key concepts, our curated content is designed to support your learning every step of the way.
+    </p>
+    <h3>What You Will Find on Our Page</h3>
+    <ul>
+      <li><strong>NCERT Solutions:</strong> Step-by-step explanations to help you master difficult topics and solve problems with ease.</li>
+      <li><strong>Study Notes:</strong> Detailed notes that cover all the essential points of your syllabus.</li>
+      <li><strong>Mind Maps:</strong> Visual tools that simplify complex subjects and improve recall.</li>
+      <li><strong>NCERT Books:</strong> Access both English and Hindi versions of your textbooks for comprehensive learning.</li>
+    </ul>
+    <p>
+      Our commitment to quality educational content is reflected in our ever-growing repository of resources that are continually updated to meet the evolving academic needs. By exploring our {{ class_instance.class_name }} resources, you are not only getting access to top-notch study materials but also joining a community of learners dedicated to academic excellence.
+    </p>
+    <p>
+      Dive into our subjects below and unlock a world of knowledge that can help you excel in your studies. With Active Study, your success is just a click away.
+    </p>
+  </article>
+<br>
+<h2>Subjects</h2>
+<br>
+
+
+<div class="box">
+  {% for subject in subjects %}
+    <div class="left-box">
+      <h3>{{ subject.subject_name }}</h3>
+      <ul id="chapters-{{ subject.id }}">
+        <!-- Chapters loaded here dynamically -->
+        <script>
+          function loadChapters(className, subjectName, targetId) {
+            const url = `/get-ch/${encodeURIComponent(className)}/${encodeURIComponent(subjectName)}/`;
+            fetch(url)
+              .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+              })
+              .then(chapters => {
+                let html = '';
+                if (chapters.length > 0) {
+                  chapters.forEach(chapter => {
+                    html += `<li><h4>${chapter.chapter_name}</h4>
+                      <ul>
+                        <li><a href="/${encodeURIComponent(className)}/${encodeURIComponent(subjectName)}/${encodeURIComponent(chapter.chapter_name)}/ncert-sol">NCERT-SOLUTIONS</a></li>
+                        <li><a href="/${encodeURIComponent(className)}/${encodeURIComponent(subjectName)}/${encodeURIComponent(chapter.chapter_name)}/notes">Notes</a></li>
+                        <li><a href="/${encodeURIComponent(className)}/${encodeURIComponent(subjectName)}/${encodeURIComponent(chapter.chapter_name)}/mindmap">MindMap</a></li>
+                        <li><a href="/${encodeURIComponent(className)}/${encodeURIComponent(subjectName)}/${encodeURIComponent(chapter.chapter_name)}/eng-book">NCERT-BOOK</a></li>
+                        <li><a href="/${encodeURIComponent(className)}/${encodeURIComponent(subjectName)}/${encodeURIComponent(chapter.chapter_name)}/hin-book">NCERT-BOOK Hindi</a></li>
+                       <li><a href="/#QUIZ">Quiz</a></li>
+                         <li><a href="/#QUESTIONS">SamplePaper/Question </a></li>
+                         <li><a href="/#WORKSEET">Worksheet</a></li>
+                      </ul>
+                    </li>`;
+                  });
+                } else {
+                  html = '<li>No chapters available for this subject.</li>';
+                }
+                document.getElementById(targetId).innerHTML = html;
+              })
+              .catch(error => {
+                console.error('Error fetching chapters:', error);
+                document.getElementById(targetId).innerHTML = '<li>Error loading chapters.</li>';
+              });
+          }
+          loadChapters('{{ class_instance.class_name }}', '{{ subject.subject_name }}', 'chapters-{{ subject.id }}');
+        </script>
+      </ul>
+    </div>
+    
+  {% empty %}
+    <p>No subjects available for this class.</p>
+  {% endfor %}
+</div>
+
+{% endblock body %}

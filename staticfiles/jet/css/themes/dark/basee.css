@@ -1,0 +1,23 @@
+
+body {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.module caption {
+    background: #252526;
+    color: #ffffff;
+}
+
+a {
+    color: #00bcd4;
+}
+
+.button, input[type="submit"], input[type="button"] {
+    background: #3a3a3a;
+    color: white;
+}
+
+.button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    background: #575757;
+}

@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% block title %}
+  Active Study Question - {{ title }}
+{% endblock title %}
+
+{% block head %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Discover in-depth insights on {{ subjectname }} including {{ chapter_name }} at {{ classname }}. Active Study offers expert guidance and answers for {{ title }} to help you master your studies.">
+  <meta name="keywords" content="{{ subjectname }}, {{ chapter_name }}, {{ title }}, Active Study, study guide, educational resources">
+  <title>{{ title }} | Active Study Q&A</title>
+  
+  <style>
+    /* Global Styles for Dark Theme and Responsive Layout */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #222;
+      color: #fff;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .container {
+      background-color: transparent;
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+    article {
+      margin-bottom: 40px;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+    /* Q&A Section Styles */
+    .qa-item {
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 15px;
+      width: 100%;
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      padding: 10px;
+      background-color: transparent;
+      width: 100%;
+      display: block;
+    }
+    .question:hover,
+    .question:focus {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .answer {
+      display: none;
+      padding: 15px;
+      margin-top: 10px;
+      background-color: transparent;
+      border-left: 3px solid #007bff;
+      color: #fff;
+      font-size: 20px;
+      width: 100%;
+    }
+    .answer.active {
+      display: block;
+    }
+    .loading, .error {
+      text-align: center;
+      font-size: 18px;
+    }
+    .loading {
+      color: #ccc;
+    }
+    .error {
+      color: #ff6b6b;
+    }
+  </style>
+{% endblock head %}
+
+{% block body %}
+  <div class="container">
+    <!-- SEO Friendly Article Section -->
+    <article>
+      <header>
+        <h1>{{ title }}</h1>
+        <h2>An In-Depth Look at {{ subjectname }} - {{ chapter_name }}</h2>
+      </header>
+      <p>Welcome to Active Study, your trusted partner in academic excellence. At {{ classname }}, we are dedicated to providing high-quality educational resources that empower you to master {{ subjectname }}. This article explores the key aspects of {{ chapter_name }} and provides expert insights on {{ title }}.</p>
+      <p>Whether you are a student striving for success or an educator looking for innovative study solutions, our comprehensive Q&A section is designed to address your most pressing questions. Active Study continuously updates its content to ensure you receive the most accurate and timely information.</p>
+      <p>Scroll down to explore our frequently asked questions and discover detailed answers that can help enhance your learning journey. We are committed to supporting your educational goals with clarity, precision, and passion.</p>
+    </article>
+    
+    <!-- Q&A Section -->
+    <section id="faq">
+      <h1>Frequently Asked Questions</h1>
+      <div id="qaContainer">
+        <p class="loading">Loading questions...</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- JavaScript to Load Q&A Data Dynamically -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const jsonUrl = `{{ que_url }}`;
+      const container = document.getElementById('qaContainer');
+
+      async function loadQA() {
+        try {
+          const response = await fetch(jsonUrl);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          container.innerHTML = '';
+
+          if (data && data.data && Array.isArray(data.data)) {
+            data.data.forEach((item, index) => {
+              const qaItem = document.createElement('div');
+              qaItem.className = 'qa-item';
+
+              const question = document.createElement('div');
+              question.className = 'question';
+              question.tabIndex = 0;
+              question.setAttribute('aria-expanded', 'false');
+              question.textContent = `${index + 1}. ${item.que}`;
+
+              const answer = document.createElement('div');
+              answer.className = 'answer';
+              answer.textContent = item.ans;
+
+              // Toggle answer visibility on click
+              question.addEventListener('click', () => {
+                const isVisible = answer.classList.toggle('active');
+                question.setAttribute('aria-expanded', isVisible);
+              });
+
+              // Allow keyboard interaction (Enter or Space)
+              question.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  question.click();
+                }
+              });
+
+              qaItem.appendChild(question);
+              qaItem.appendChild(answer);
+              container.appendChild(qaItem);
+            });
+          } else {
+            container.innerHTML = '<p class="error">No questions available.</p>';
+          }
+        } catch (error) {
+          console.error('Error loading Q&A data:', error);
+          container.innerHTML = '<p class="error">Error loading questions and answers. Please try again later.</p>';
+        }
+      }
+
+      loadQA();
+    });
+  </script>
+{% endblock body %}

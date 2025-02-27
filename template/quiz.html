@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+{% block title %}
+Active Study Quiz
+{% endblock title %}
+{% block head %}
+<meta name="description" content="Active Study Quiz – Test your knowledge with our interactive quiz for Class {{ classname }}, Subject {{ subjectname }}, Chapter {{ chapter_name }}." />
+<meta name="keywords" content="Active Study, Quiz, {{ classname }}, {{ subjectname }}, {{ chapter_name }}, interactive quiz" />
+<link rel="canonical" href="{{ request.build_absolute_uri }}" />
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="Active Study Quiz - {{ quiz.title|default:'Quiz' }}" />
+<meta property="og:description" content="Take the interactive quiz for {{ chapter_name }} in {{ subjectname }} designed by Active Study." />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:site_name" content="Active Study" />
+{% endblock head %}
+{% block body %}
+  <style>
+ 
+
+    .quiz-container {
+      max-width: 600px;
+      margin: auto;
+     
+      border-radius: 10px;
+      /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+    }
+
+    #questionText {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option {
+      background-color: cyan;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .option:hover {
+      background-color: #b2ebf2;
+    }
+
+    #counter {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      color: #666;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #resultsPanel {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #resultsPanel div {
+      margin: 10px 0;
+    }
+  </style>
+
+  <span id="element" style="display: none;" ></span>
+  <br>
+  <div class="quiz-container card" style="width: 95%;">
+    <h1>Quiz</h1>
+    <!-- Question Text -->
+    <div id="questionText">Loading question...</div>
+
+    <!-- Options -->
+    <div class="options">
+      <button style="color: black; font-size: larger;" id="op1" class="option"></button>
+      <button style="color: black; font-size: larger;" id="op2" class="option"></button>
+      <button style="color: black; font-size: larger;" id="op3" class="option"></button>
+      <button style="color: black; font-size: larger;" id="op4" class="option"></button>
+    </div>
+
+    <!-- Question Counter -->
+    <div id="counter">0 / 0</div>
+
+    <!-- Next and Reset Buttons -->
+    <div class="buttons">
+     <button id="resetButton">Reset</button>
+     <a href="index.html">
+     <button >Home</button>
+    </a>
+      <button id="nextButton">Next</button>
+    </div>
+
+    <!-- Results Panel -->
+    <div id="resultsPanel">
+      <h2  style="color: white;" >Quiz Results</h2>
+      <div style="color: white;" id="totalQuestions">Total Questions: 0</div>
+      <div style="color: white;" id="correctAnswers">Correct Answers: 0</div>
+      <div style="color: white;" id="incorrectAnswers">Incorrect Answers: 0</div>
+      <div style="color: white;" id="skippedQuestions">Skipped Questions: 0</div>
+    </div>
+  </div>
+  <center>
+  <button id="start" class="card" onclick="hide()" style="align-items: center; color: white;">Start Quiz</button>
+</center>
+ 
+  <p id="data" style="display: none;"></p>
+
+  
+  <script>
+    // Hide the "Start Quiz" button when clicked
+    function hide() {
+      document.getElementById("start").style.display = "none";
+    }
+  
+    // Quiz system class definition
+    class QuizSystem {
+      constructor(data) {
+        this.questions = data || [];
+        this.currentIndex = -1;
+        this.correctCount = 0;
+        this.incorrectCount = 0;
+        this.skipCount = 0;
+        this.isAnswerClicked = true;
+      }
+  
+      loadQuiz() {
+        this.currentIndex++;
+        // Count skipped questions if no answer was clicked (except for the first question)
+        if (this.isAnswerClicked && this.currentIndex !== 0) {
+          this.skipCount++;
+        }
+  
+        if (this.currentIndex < this.questions.length) {
+          this.renderQuestion(this.questions[this.currentIndex]);
+          this.updateCounter();
+          if (this.currentIndex === this.questions.length - 1) {
+            document.getElementById("nextButton").innerText = "Submit";
+          }
+        } else {
+          this.showResults();
+        }
+        this.isAnswerClicked = true;
+      }
+  
+      renderQuestion(questionObj) {
+        document.getElementById("questionText").innerText = questionObj.question;
+        document.getElementById("op1").innerText = questionObj.op_1;
+        document.getElementById("op2").innerText = questionObj.op_2;
+        document.getElementById("op3").innerText = questionObj.op_3;
+        document.getElementById("op4").innerText = questionObj.op_4;
+        this.resetOptionStyles();
+      }
+  
+      checkAnswer(selectedOption) {
+        const correctAnswer = this.questions[this.currentIndex].ans;
+        const selectedText = document.getElementById(selectedOption).innerText;
+  
+        if (selectedText === correctAnswer) {
+          document.getElementById(selectedOption).style.backgroundColor = "green";
+          this.correctCount++;
+        } else {
+          document.getElementById(selectedOption).style.backgroundColor = "red";
+          this.highlightCorrectAnswer(correctAnswer);
+          this.incorrectCount++;
+        }
+        this.isAnswerClicked = false;
+      }
+  
+      highlightCorrectAnswer(answer) {
+        ["op1", "op2", "op3", "op4"].forEach((id) => {
+          if (document.getElementById(id).innerText === answer) {
+            document.getElementById(id).style.backgroundColor = "green";
+          }
+        });
+      }
+  
+      resetOptionStyles() {
+        ["op1", "op2", "op3", "op4"].forEach((id) => {
+          const element = document.getElementById(id);
+          element.style.backgroundColor = "cyan";
+        });
+      }
+  
+      updateCounter() {
+        document.getElementById("counter").innerText = `${this.currentIndex + 1} / ${this.questions.length}`;
+      }
+  
+      showResults() {
+        const total = this.correctCount + this.incorrectCount + this.skipCount;
+        document.getElementById("totalQuestions").innerText = `Total Questions: ${total}`;
+        document.getElementById("correctAnswers").innerText = `Correct Answers: ${this.correctCount}`;
+        document.getElementById("incorrectAnswers").innerText = `Incorrect Answers: ${this.incorrectCount}`;
+        document.getElementById("skippedQuestions").innerText = `Skipped Questions: ${this.skipCount}`;
+        document.getElementById("resultsPanel").style.display = "block";
+      }
+  
+      resetQuiz() {
+        this.currentIndex = -1;
+        this.correctCount = 0;
+        this.incorrectCount = 0;
+        this.skipCount = 0;
+        this.isAnswerClicked = true;
+        this.loadQuiz();
+        document.getElementById("resultsPanel").style.display = "none";
+        document.getElementById("nextButton").innerText = "Next";
+      }
+    }
+  
+    document.addEventListener("DOMContentLoaded", () => {
+      let quiz;
+      // Update this URL to point to your quiz JSON data
+      const quizDataUrl = `{{quiz_url}}`; 
+      // e.g., "/api/quiz-data" or a static JSON file URL
+  
+      document.getElementById("start").addEventListener("click", async () => {
+        try {
+          // Fetch the quiz data from the specified URL
+          const response = await fetch(quizDataUrl);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const jsonData = await response.json();
+  
+          // Verify that the expected 'data' field exists
+          if (!jsonData.data) {
+            alert("No quiz data found at the provided URL.");
+            return;
+          }
+  
+          // Initialize the quiz with the fetched data
+          quiz = new QuizSystem(jsonData.data);
+          quiz.loadQuiz();
+        } catch (error) {
+          console.error("Error initializing quiz:", error);
+          alert("Failed to load quiz data.");
+        }
+      });
+  
+      document.getElementById("nextButton").addEventListener("click", () => {
+        if (quiz) {
+          quiz.loadQuiz();
+        } else {
+          alert("Please load quiz data first.");
+        }
+      });
+  
+      // Add event listeners to option buttons
+      ["op1", "op2", "op3", "op4"].forEach((id) => {
+        document.getElementById(id).addEventListener("click", () => {
+          if (quiz) {
+            quiz.checkAnswer(id);
+          }
+        });
+      });
+  
+      // Reset button event listener
+      document.getElementById("resetButton").addEventListener("click", () => {
+        if (quiz) {
+          quiz.resetQuiz();
+        }
+      });
+    });
+  </script>
+  
+  
+
+  {% endblock body %}

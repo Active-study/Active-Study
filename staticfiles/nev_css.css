@@ -1,0 +1,94 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e2f;
+    color: #fff;
+}
+.custom-navbar {
+    background-color: #2b2b40;
+    border: 1px solid #3a3a50;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+     /* Three-color gradient */
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #fff;
+    
+    transition: transform 0.3s ease;
+    
+}
+
+.navbar-brand, .nav-link {
+    color: white !important; /* Override Bootstrap's default color */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffd700 !important; /* Gold color on hover */
+}
+
+.navbar-toggler {
+    border-color: white;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+a {
+    text-decoration: none;
+  }
+  .custom-navbar:hover{
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    background-color: #252532;
+    padding: 0.5rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+nav a:hover {
+    color: #3a86ff;
+}
+.card {
+    background-color: #2b2b40;
+    border: 1px solid #3a3a50;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    margin: 1rem;
+    padding: 1.5rem;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem;
+}
+footer {
+    background-color:  #2b2b40;;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+p{
+    color: white;
+}
