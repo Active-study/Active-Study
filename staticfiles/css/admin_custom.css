@@ -1,4 +1,213 @@
-/* static/css/admin_custom.css */
+/* ----------------------------------------------------
+   GLOBAL STYLES
+----------------------------------------------------- */
 body {
-    background-color: #f0f0f0;  /* Replace with your desired color */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e2f;
+    color: #fff;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: #ffd700; /* Gold hover color */
+}
+
+/* ----------------------------------------------------
+   HEADER & USER TOOLS
+----------------------------------------------------- */
+#header, .header {
+    background-color: #2b2b40;
+    border-bottom: 1px solid #3a3a50;
+    padding: 10px 20px;
+}
+#header h1, .header h1 {
+    color: #fff;
+    margin: 0;
+}
+#user-tools, .user-tools {
+    float: right; /* or use flex if you prefer */
+}
+#user-tools a, .user-tools a {
+    color: #fff;
+    margin-left: 10px;
+    font-weight: bold;
+}
+#user-tools a:hover, .user-tools a:hover {
+    color: #ffd700;
+}
+
+/* ----------------------------------------------------
+   DASHBOARD / MODULES (Admin Index)
+----------------------------------------------------- */
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px;
+}
+.dashboard-left, .dashboard-right {
+    flex: 0 0 48%;
+    box-sizing: border-box;
+}
+
+.module, .dashboard .module {
+    background-color: #2b2b40;
+    border: 1px solid #3a3a50;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+.module h2, .dashboard .module h2 {
+    color: #fff;
+    margin-top: 0;
+    border-bottom: 1px solid #3a3a50;
+    padding-bottom: 5px;
+}
+.module table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.module table th,
+.module table td {
+    border: 1px solid #3a3a50;
+    padding: 8px;
+    vertical-align: middle;
+}
+.module table th {
+    background-color: #252532;
+    color: #fff;
+}
+.module table td a {
+    color: #fff;
+}
+.module table td a:hover {
+    color: #ffd700;
+}
+
+/* ----------------------------------------------------
+   RECENT ACTIONS
+----------------------------------------------------- */
+#content .recent-actions,
+#content .recentactions,
+#recent-actions-module {
+    background-color: #2b2b40;
+    border: 1px solid #3a3a50;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+#content .recent-actions h2,
+#content .recentactions h2,
+#recent-actions-module h2 {
+    color: #fff;
+    margin-top: 0;
+    border-bottom: 1px solid #3a3a50;
+    padding-bottom: 5px;
+}
+#content .recent-actions ul,
+#content .recentactions ul,
+#recent-actions-module ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#content .recent-actions li,
+#content .recentactions li,
+#recent-actions-module li {
+    margin: 8px 0;
+}
+/* Optional: add icons for added/changed/deleted */
+#content .recent-actions li.added::before {
+    content: "+ ";
+    color: #0f0;
+}
+#content .recent-actions li.changed::before {
+    content: "! ";
+    color: #ffd700;
+}
+#content .recent-actions li.deleted::before {
+    content: "× ";
+    color: #f00;
+}
+
+/* ----------------------------------------------------
+   FORMS / INPUTS
+----------------------------------------------------- */
+input, select, textarea {
+    background-color: #2b2b40;
+    border: 1px solid #3a3a50;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    width: 100%; /* Adjust as needed */
+    box-sizing: border-box;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #ffd700;
+    outline: none;
+}
+
+/* ----------------------------------------------------
+   BUTTONS
+----------------------------------------------------- */
+button,
+.button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    background-color: #2b2b40;
+    border: 1px solid #3a3a50;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+button:hover,
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover {
+    background-color: #3a3a50;
+    transform: scale(1.05);
+}
+
+/* ----------------------------------------------------
+   PAGINATION
+----------------------------------------------------- */
+.paginator {
+    background-color: #2b2b40;
+    border: 1px solid #3a3a50;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    margin: 20px 0;
+}
+.paginator a, .paginator span {
+    color: #fff;
+    margin: 0 5px;
+}
+.paginator a:hover {
+    color: #ffd700;
+}
+
+/* ----------------------------------------------------
+   HEADINGS & FOOTER
+----------------------------------------------------- */
+#content h1, #content h2, #content h3 {
+    color: #fff;
+}
+footer {
+    background-color: #2b2b40;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #3a3a50;
 }
