@@ -89,9 +89,13 @@ WSGI_APPLICATION = 'Active.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'defaultdb',
+		'USER': 'avnadmin',
+		'PASSWORD': 'AVNS_IKVjXjRRJOB6Pd0L9a6',
+		'HOST':'mysql-active-string672024-11f3.h.aivencloud.com',
+		'PORT':'10569',
+	}
 }
 
 
