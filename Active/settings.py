@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+     'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     "home",
     'whitenoise.runserver_nostatic',
     
@@ -138,6 +140,7 @@ USE_TZ = True
 
 
 MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
@@ -146,5 +149,9 @@ STATICFILES_DIRS = [
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dc3asso9u',
+    'API_KEY': '874617888117783',
+    'API_SECRET': 'OHMDc3bjJBu-TCAzSTzWG-4cbJA'
+}
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
